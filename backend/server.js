@@ -1,3 +1,4 @@
+
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -13,12 +14,27 @@ import assessmentRoutes from "./routes/assessmentRoutes.js";
 import studyRoutes from "./routes/studyRoutes.js";
 import analyticsRoutes from "./routes/analyticsRoutes.js";
 import noteRoutes from "./routes/noteRoutes.js";
+
 dotenv.config();
 
 const app = express();
 
+// CORS configuration
+const allowedOrigins = [
+    "http://localhost:5173",
+    "https://skill-track-eight-virid.vercel.app"
+];
+
 app.use(cors({
-    origin: "http://localhost:5173"
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
 app.use(express.json());
@@ -36,10 +52,10 @@ app.get("/api/health", (req, res) => {
     });
 });
 
-// Authentication routes
+// Application routes
 app.use("/api/auth", authRoutes);
 app.use("/api/goals", learningGoalRoutes);
-app.use("/api/roadmaps",roadmapRoutes);
+app.use("/api/roadmaps", roadmapRoutes);
 app.use("/api/resources", resourceRoutes);
 app.use("/api/coding-problems", codingProblemRoutes);
 app.use("/api/contests", contestRoutes);
@@ -47,6 +63,7 @@ app.use("/api/assessments", assessmentRoutes);
 app.use("/api/study", studyRoutes);
 app.use("/api/analytics", analyticsRoutes);
 app.use("/api/notes", noteRoutes);
+
 // Start server
 const startServer = async () => {
     await connectDB();
