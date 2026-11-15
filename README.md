@@ -282,16 +282,6 @@ Open the local URL displayed by Vite in your browser.
 
 ---
 
-## 👨‍💻 Team Members
-
-| Student ID | Name |
-|---|---|
-| 241FA04535 | Dhanush |
-| 241FA04562 | Yagnesh |
-| 241FA04E13 | Charan |
-
----
-
 ## 🎓 Project Information
 
 **Project Name:** SkillTrack – Personal Learning & Growth Platform
