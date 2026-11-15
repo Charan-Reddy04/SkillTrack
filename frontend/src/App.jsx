@@ -17,11 +17,12 @@ import PersonalNotes from "./pages/PersonalNotes";
 import Settings from "./pages/Settings";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AppLayout from "./components/layout/AppLayout";
-
+import LandingPage from "./pages/LandingPage";
 function App() {
     return (
         <Routes>
             {/* Public pages */}
+            <Route path="/" element={<LandingPage />} />
             <Route
                 path="/"
                 element={<Navigate to="/login" replace />}
